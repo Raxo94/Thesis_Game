@@ -1,0 +1,2 @@
+step 1: implement Wii controller
+step 2: Find a suitable game.
