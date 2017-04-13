@@ -1,0 +1,30 @@
+I created a a github repository for the experiment.
+Then i started a unity 3D project inside the repository.
+The Reason i started a 3D project is because i was undecided with how the game should play. And both 2D and 3D games can be made with Unity 3D.
+
+I started by making a player object. Since the game might play in first person perspective i just used a cube. Cubes are also good for test purposes. 
+I then added a player script upon the player object. I did this to be able to move and use the player to interact with other components of the game.
+For the purpose of being fully able to see the player when moving around, a camera script that follows the palyer is needed.
+To make the camera script we simply update the camera's position to be the same as the players position. We also add an offset so that we can decide later if
+the camera should be closer or nearer to the player. In the begining i just set the offset to 0, resulting in a first person perspective.
+
+
+In order to make a obstacle course game, obstacles are needed. To make obstacles boxes where created. The boxes contained colliders preventing the player from moving trough them.
+The boxes also contain trigger boxes that are made to help count collision count. The collider box could also have been used for checking collisions but since the collisions 
+Where not consistantly counted when using them, triggerboxes were used instead. The triggerboxes where made little bit bigger than the Colliders, so that the player could enter them.
+
+To make the trigger boxes on the obstacles record the collisions between them and the player, a script had to be made.
+The script uses the standard unity function, onTriggerEnter. 
+
+On every frame the onTrigger function checks if any objects are within the triggerbox. To make sure the obstacle only recorded hits with the Player
+a pointer to the player gameobject was given to the script. Then the Collider makes sure that it is specifically that gameobject that collides with it. 
+If that is the case, a counter is incremented. To make sure that all collisions are saved at the same place, the counter was placed within the player script. 
+I could have had all obstacles rememmember their own collisions, but that would require then that some other script summs up all the collisions at the end of the game.
+That is both more unsecure and ambigous then just letting the player class keep track of collisions. Another solution could have been to make a new script that kept track of collisions. 
+since that script would have had no other purpose as of this moment it felt better not to do so.
+
+Another check that was made in order to make sure collision count is handled correctly is that no obstacle can continusly be collided with. 
+This would have caused problems in the form of a collision resulting in several increments on the collision counter. In order to avoid this the player 
+script was appended with a variable keeping track of the latest collision object. If the same object as the variable tries to record a collision, no increment is made.
+
+Another solution would be to have a timer, and before that timer runs out, the player cant collide with anything. Perhaps this will be implemented later.
